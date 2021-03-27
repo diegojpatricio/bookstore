@@ -4,7 +4,9 @@ import com.diegoptricio.bookstore.domain.Categoria;
 import com.diegoptricio.bookstore.domain.DTO.CategoriaDTO;
 import com.diegoptricio.bookstore.repositories.CategoriaRepository;
 import com.diegoptricio.bookstore.services.exceptions.ObjectNotFoundExeption;
+import com.diegoptricio.bookstore.services.exceptions.ViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +42,12 @@ public class CategoriaService {
 
     public void deletar(Integer id) {
         buscarCategoriaId(id);
-        cr.deleteById(id);
+        try {
+            cr.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            throw new ViolationException("A categoria não pode ser deletado. Possui livros acessiados.");
+        }
+
+
     }
 }
