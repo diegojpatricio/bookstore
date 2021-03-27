@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "LIVROS")
+@Table(name = "Livros")
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,9 +15,14 @@ public class Livro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "titulo")
     private String titulo;
+    @Column(name = "nomeAutor")
     private String nomeAutor;
+    @Column(name = "texto")
     private String texto;
+
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")

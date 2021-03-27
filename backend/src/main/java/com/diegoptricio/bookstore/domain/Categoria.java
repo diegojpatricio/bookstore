@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="CATEGORIAS")
+@Table(name = "Categorias")
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,9 +17,14 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "descricao")
     private String descricao;
+
 
     @OneToMany(mappedBy = "categoria")
     private List<Livro> livros = new ArrayList<>();
+
+
 }
