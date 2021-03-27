@@ -1,5 +1,6 @@
 package com.diegoptricio.bookstore.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,8 +24,13 @@ public class Livro implements Serializable {
     @Column(name = "texto")
     private String texto;
 
-
-    @ManyToOne
+    /**
+     * O @JsonIgnore protege a APP contra serialização.
+     * A serialização ocorre Devido a relação entre as entidades, pois
+     * a entidade categorias possui livros e livros possui categorias.
+     */
+    @JsonIgnore
+    @ManyToOne 
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
